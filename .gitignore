@@ -1,3 +1,14 @@
+
+$ git diff  .gitignore
+diff --git a/.gitignore b/.gitignore
+index 7ad9cc4..db68fb0 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,3 +1,5 @@
 venv
 db.sqlite3
-trail/__pycache__/
+-trail/__pycache__/
++*__pycache__
++*.egg-info/
++#*#
+                                
