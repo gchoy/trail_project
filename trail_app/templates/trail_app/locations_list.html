@@ -1,0 +1,11 @@
+<div>
+    <h1><a href="/">Trail Locations</a></h1>
+</div>
+    
+{% for location in locations %}
+    <div>
+        <p>created: {{ location.date }}</p>
+        <h2><a href="">{{ location.name }}</a></h2>
+        
+    </div>
+{% endfor %}
