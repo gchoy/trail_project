@@ -1,0 +1,20 @@
+
+{% load bootstrap4 %}
+
+{% block title %}
+<div class="container">
+   <div class="row">
+      <div>
+               <h2><a>{{ location.name }}</a></h2>
+      </div>
+   </div>
+</div>
+{% endblock %}
+                      
+{% block content %}
+<div class="locationt">
+         <p>{{ location.address|linebreaksbr }}</p>
+         <p>{{ location.lat|linebreaksbr }}</p>
+         <p>{{ location.lon|linebreaksbr }}</p>
+</div>                                                                       
+{% endblock %}

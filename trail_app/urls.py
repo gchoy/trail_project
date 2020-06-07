@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('locations', views.locations_list, name='locations_list'),
-    #path('locations/<int:location_id>/', views.location_detail, name='location_detail'),
-    #path('new_location/', views.new_location, name='add_location'),
+    path('locations/<int:id>/', views.location_detail, name='location_detail'),
+    #path('add_location/', views.add_location, name='add_location'),
 ]

@@ -5,7 +5,7 @@
 {% for location in locations %}
     <div>
         <p>created: {{ location.date }}</p>
-        <h2><a href="">{{ location.name }}</a></h2>
+        <h2><a href="{% url 'location_detail' id=location.id %}">{{ location.name }}</a></h2>
         
     </div>
 {% endfor %}
