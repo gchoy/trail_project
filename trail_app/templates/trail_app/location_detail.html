@@ -1,4 +1,4 @@
-
+{% extends 'trail_app/base.html' %}
 {% load bootstrap4 %}
 
 {% block title %}
@@ -12,7 +12,8 @@
 {% endblock %}
                       
 {% block content %}
-<div class="locationt">
+<div class="location">
+         <a class="btn btn-default" href="{% url 'location_edit' id=location.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
          <p>{{ location.address|linebreaksbr }}</p>
          <p>{{ location.lat|linebreaksbr }}</p>
          <p>{{ location.lon|linebreaksbr }}</p>
