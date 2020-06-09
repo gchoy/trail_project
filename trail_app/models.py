@@ -3,7 +3,7 @@ from django.db import models
 
 class Location(models.Model):
     name = models.CharField(max_length=250)
-    location_address = models.CharField(max_length=250)
+    address = models.CharField(max_length=250)
     public = models.BooleanField()
     lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
