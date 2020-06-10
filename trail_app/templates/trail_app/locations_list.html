@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 <div>
     <h1><a href="/">Trail Locations</a></h1>
@@ -13,18 +13,6 @@
     </div>
 {% endfor %}
 
-
-    <form action="{% url 'trail_app:locations_list' location.id location.name %}" method="post">
-    {% csrf_token %}
-    
-        
-    {% buttons %}
-       <button type="submit" value = "New" class="btn btn-primary">
-            New
-       </button>
-    {% endbuttons %}
-                           
-    </form>
 
 {% endblock %}
 
