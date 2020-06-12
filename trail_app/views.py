@@ -37,7 +37,7 @@ def location_new(request):
     else:
         form = LocationForm() 
         return render(request,
-                      'trail_app/location_edit.html',
+                      'trail_app/location_new.html',
                       {'form': form})
 
 
