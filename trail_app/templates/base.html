@@ -1,10 +1,16 @@
+{% load static %}
 {% load bootstrap4 %}
 
+{# Load CSS and JavaScript #}
 {% bootstrap_css %}
-{% bootstrap_javascript %}
+{% bootstrap_javascript jquery='full' %}
 
-{% block bootstrap4_content %}
-<div class="container">
+<html lang="en">
+<head>
+  <title>{% block title %}Locations{% endblock %}</title>
+</head>
+<body>
+  {% block navigation %}
     <nav  class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">About</a>
@@ -24,11 +30,16 @@
             </ul>
         </div>
     </nav>
-    <h1>{% block title %}Locations{% endblock %}</h1>
+  {% endblock %}
 
-    {% bootstrap_messages %}
+  <div class="container">
+    <h1>{% block title_orig %}Locations{% endblock %}</h1>
 
-    {% block content %}(no content){% endblock %}
-</div>
+    <div class="row">
+      {% block content %}(no content){% endblock %}
+      {% bootstrap_messages %}
+    </div><!-- end outside most row -->
+  </div><!-- end container -->
+</body>
+</html>
 
-{% endblock %}

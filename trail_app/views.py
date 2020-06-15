@@ -26,8 +26,8 @@ def location_new(request):
     if request.method == "POST":
         form = LocationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(reverse('location_detail'))
+            new_location = form.save()
+            return redirect(reverse('location_detail', args=(new_location.id,)))
         else:
             return render(
                 request,
