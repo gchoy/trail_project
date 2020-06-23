@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
 
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
@@ -53,8 +54,11 @@ def location_edit(request, id):
             location.lat = request.lat
             location.lon = request.lon
             location.save()
-            return redirect('location_detail', id=location.id)
+            return HttpResponse("Hello")
+            #return render(request, 'trail_app/location_edit.html', {'location.id}': location.id, 'form': form})
+            #return redirect(reverse('trail_app/location_edit.html', args=(new_location.id,)))
+            #return HttpResponseRedirect(reverse('trail_app/location_edit', args=(location.id,)))
         else:
             form = LocationForm(instance=location)
-        return render(request, 'trail_app/location_edit.html', {'form': form})
+        return render(request, 'trail_app/location_edit.html', {'location.id': location.id, 'form': form})
 
