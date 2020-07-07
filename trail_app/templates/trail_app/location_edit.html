@@ -12,8 +12,10 @@
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'trail_app:location_edit' location.id %}" method="post">
+<form action="{% url 'location_edit' location.id %}" method="post">
     {% csrf_token %}
+    {{ form.as_p }}
+    
     {% buttons %}
     <button type="submit" value = "Edit" class="btn btn-primary">
       Edit

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
 
+#Location views
 
 def locations_list(request):
     """List of Locations"""
@@ -54,11 +55,54 @@ def location_edit(request, id):
             location.lat = request.lat
             location.lon = request.lon
             location.save()
-            return HttpResponse("Hello")
-            #return render(request, 'trail_app/location_edit.html', {'location.id}': location.id, 'form': form})
-            #return redirect(reverse('trail_app/location_edit.html', args=(new_location.id,)))
-            #return HttpResponseRedirect(reverse('trail_app/location_edit', args=(location.id,)))
+            return HttpResponseRedirect(reverse('trail_app:location_edit', args=(location.id,)))
+    else:
+        form = LocationForm(instance=location)
+    return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
+
+
+#Spot views
+
+def spots_list(request):
+    """List of Spots"""
+ 
+    spots = list(Spot.objects.all())
+
+    return render(request,
+                  'trail_app/spots_list.html',{'spots': spots})
+
+def spot_detail(request, id):
+    """Spot Detail"""
+
+    spot = get_object_or_404(Spot, id=id)
+    return render(request, 'trail_app/spot_detail.html', {'spot': spot})
+
+
+
+def spot_new(request):
+    """Adding a new Spot. Users are able to add a new spot once signed in"""
+
+    if request.method == "POST":
+        form = SpotForm(request.POST)
+        if form.is_valid():
+            new_spot = form.save()
+            return redirect(reverse('spot_detail', args=(new_spot.id,)))
         else:
-            form = LocationForm(instance=location)
-        return render(request, 'trail_app/location_edit.html', {'location.id': location.id, 'form': form})
+            return render(
+                request,
+                'trail_app/spot_new.html',
+                {'form': form})
+
+    else:
+        form = SpotForm() 
+        return render(request,
+                      'trail_app/spot_new.html',
+                      {'form': form})
+
+
+
+
+
+
+
 
