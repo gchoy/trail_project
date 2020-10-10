@@ -50,12 +50,16 @@ def location_edit(request, id):
         form = LocationForm(request.POST, instance=location)
         if form.is_valid():
             location = form.save(commit=False)
-            location.address = request.address
-            location.public = request.public
-            location.lat = request.lat
-            location.lon = request.lon
+            location.address = form.data['address']
+            if 'public' in form.data and form.data['public'] == 'on':
+                location.public = True
+            else:
+                location.public = False
+
+            location.lat = form.data['lat']
+            location.lon = form.data['lon']
             location.save()
-            return HttpResponseRedirect(reverse('trail_app:location_edit', args=(location.id,)))
+            return HttpResponseRedirect(reverse('location_edit', args=(location.id,)))
     else:
         form = LocationForm(instance=location)
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
