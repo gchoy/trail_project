@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+<div class="container">
+  <div class="row">
+     <div>
+        <h2>Trail Editing</h2>
+     </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'trail_edit' trail.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% buttons %}
+    <button type="submit" value = "Edit" class="btn btn-primary">
+      Edit
+    </button>
+    {% endbuttons %}
+
+</form>
+{% endblock %}
+
+

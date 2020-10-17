@@ -25,18 +25,15 @@ class Spot(models.Model):
 
 class Trail(models.Model):
     trail_spot = models.ManyToManyField(Spot)
-    trail_location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True)
     trail_name = models.CharField(max_length=250)
     trail_public = models.BooleanField()
     trail_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     trail_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     trail_date = models.DateTimeField(auto_now_add=True)
-    
-    
+
     def __str__(self):
         return self.trail_name
-
-    """def trail_spot_(self):
-        lst = [x[1] for x in self.tags.values_list()]
-        return str(lst.join(','))"""
-        
+    
+    def trail_spot_(self):
+       lst = [x[1] for x in self.trail_spot.values_list()]
+       return str(lst.join(','))

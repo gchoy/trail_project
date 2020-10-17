@@ -1,0 +1,108 @@
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+
+from .forms import LocationForm, SpotForm, TrailForm 
+from .models import Location, Spot, Trail
+
+#Location views
+
+def locations_list(request):
+    """List of Locations"""
+ 
+    locations = list(Location.objects.all())
+
+    return render(request,
+                  'trail_app/locations_list.html',{'locations': locations})
+
+def location_detail(request, id):
+    """Location Detail"""
+
+    location = get_object_or_404(Location, id=id)
+    return render(request, 'trail_app/location_detail.html', {'location': location})
+
+
+
+def location_new(request):
+    """Adding a new Location. Users are able to add a new location once signed in"""
+
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            new_location = form.save()
+            return redirect(reverse('location_detail', args=(new_location.id,)))
+        else:
+            return render(
+                request,
+                'trail_app/location_new.html',
+                {'form': form})
+
+    else:
+        form = LocationForm() 
+        return render(request,
+                      'trail_app/location_new.html',
+                      {'form': form})
+
+
+
+def location_edit(request, id):
+    location = get_object_or_404(Location, id=id)
+    if request.method == "POST":
+        form = LocationForm(request.POST, instance=location)
+        if form.is_valid():
+            location = form.save(commit=False)
+            location.address = ss
+            location.public = request.public
+            location.lat = request.lat
+            location.lon = request.lon
+            location.save()
+            return HttpResponseRedirect(reverse('location_edit', args=(location.id,)))
+    else:
+        form = LocationForm(instance=location)
+    return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
+
+
+#Spot views
+
+def spots_list(request):
+    """List of Spots"""
+ 
+    spots = list(Spot.objects.all())
+
+    return render(request,
+                  'trail_app/spots_list.html',{'spots': spots})
+
+def spot_detail(request, id):
+    """Spot Detail"""
+
+    spot = get_object_or_404(Spot, id=id)
+    return render(request, 'trail_app/spot_detail.html', {'spot': spot})
+
+
+
+def spot_new(request):
+    """Adding a new Spot. Users are able to add a new spot once signed in"""
+
+    if request.method == "POST":
+        form = SpotForm(request.POST)
+        if form.is_valid():
+            new_spot = form.save()
+            return redirect(reverse('spot_detail', args=(new_spot.id,)))
+        else:
+            return render(
+                request,
+                'trail_app/spot_new.html',
+                {'form': form})
+
+    else:
+        form = SpotForm() 
+        return render(request,
+                      'trail_app/spot_new.html',
+                      {'form': form})
+
+
+
+
+
+
+
+

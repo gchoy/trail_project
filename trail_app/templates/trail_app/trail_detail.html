@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Trails{% endblock %}
+
+{% block title_orig %}
+<div class="container">
+   <div class="row">
+      <div>
+               <h2><a>{{ trail.trail_name }}</a></h2>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="location">
+           <a class="btn btn-default" href="/trails/{{ trail.id }}/edit/"></a>
+         <p>{{ trail.trail_name|linebreaksbr }}</p>
+         <p>{{ trail.trail_location|linebreaksbr }}</p>
+         <p>{{ trail.trail_public|linebreaksbr }}</p>
+         <p>{{ trail.trail_lat|linebreaksbr }}</p>
+         <p>{{ trail.trail_lon|linebreaksbr }}</p>
+</div>
+{% endblock %}
+
+

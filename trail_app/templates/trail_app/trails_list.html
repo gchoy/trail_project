@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+<div>
+    <h1><a href="/">Trails at a Location</a></h1>
+</div>
+
+{% block content %}
+{% for trail in trails %}
+    <div>
+        <p>created: {{ trail.trail_date }}</p>
+        <h2><a href="{% url 'trail_detail' id=trail.id %}">{{ trail.trail_name }}</a></h2>
+
+    </div>
+{% endfor %}
+
+
+{% endblock %}
+
+

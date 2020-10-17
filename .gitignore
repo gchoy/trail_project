@@ -114,8 +114,7 @@ dmypy.json
 
 venv
 db.sqlite3
--trail/__pycache__/
-+*__pycache__
-+*.egg-info/
-+#*#
+*__pycache__
+*.egg-info/
+#*#
                                 
