@@ -42,6 +42,29 @@
             {% endfor %} 
                   
          </div>
+         
+         <br>
+         <hr>
+         
+         <div class="trail">
+            <div>
+               <h3>Trails</h2>
+            </div>
+                                                  
+            {% for trail in trails_on_location %}
+               <div>
+                   <h4><a href="/trails/{{trail.id}}/">{{ trail|linebreaksbr }}</a></h4>
+               </div>
+            {% endfor %}
+                                                                                                                              
+         </div>
+                                                                                                                                       
+         
+         
+         
+         
+         
+         
             
 </div>                                                                       
 {% endblock %}

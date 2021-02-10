@@ -18,14 +18,14 @@ def location_detail(request, id):
     """Location Detail"""
     
     location = get_object_or_404(Location, id=id)
-    print(location)
     spots_on_location = Spot.objects.filter(spot_location=id)
-    print(spots_on_location)
-    spots_lists = list(Spot.objects.filter(spot_location=id))
-    print(spots_lists)
+    trails_on_location = Trail.objects.filter(trail_location=id)
     
-    return render(request, 'trail_app/location_detail.html', {'location': location, 'spots_on_location': spots_on_location})
-    #return render(request, 'trail_app/location_detail.html', {'location': location})
+    return render(
+          request,
+          'trail_app/location_detail.html', 
+          {'location': location, 'spots_on_location': spots_on_location, 'trails_on_location': trails_on_location})
+    
 
 
 def location_new(request):
