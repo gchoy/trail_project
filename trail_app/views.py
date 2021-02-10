@@ -16,10 +16,16 @@ def locations_list(request):
 
 def location_detail(request, id):
     """Location Detail"""
-
+    
     location = get_object_or_404(Location, id=id)
-    return render(request, 'trail_app/location_detail.html', {'location': location})
-
+    print(location)
+    spots_on_location = Spot.objects.filter(spot_location=id)
+    print(spots_on_location)
+    spots_lists = list(Spot.objects.filter(spot_location=id))
+    print(spots_lists)
+    
+    return render(request, 'trail_app/location_detail.html', {'location': location, 'spots_on_location': spots_on_location})
+    #return render(request, 'trail_app/location_detail.html', {'location': location})
 
 
 def location_new(request):
@@ -63,6 +69,20 @@ def location_edit(request, id):
     else:
         form = LocationForm(instance=location)
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
+
+
+def show_spots_on_location(request, location_id):
+    """Show the spots linked to a spot"""
+    
+    spots_on_location = Spot.objects.filter(spot_location=location.id)
+    return render(request, 'trail_app/location_detail.html', {'spots_on_location': spots_on_location,'location_id': location.id})
+    
+
+def show_trails_on_locations(request, id):
+    """Show the trails linked to a location"""
+    pass
+
+
 
 
 #Spot views
@@ -166,7 +186,6 @@ def trail_new(request):
                       {'form': form})
 
 
-#fields = ('trail_spot', 'trail_location', 'trail_name','trail_public','trail_lon','trail_lat',)
 
 def trail_edit(request, id):
     trail = get_object_or_404(Trail, id=id)
@@ -193,3 +212,6 @@ def trail_edit(request, id):
 
 
 
+def add_spots_to_trail(request, id):
+    """Add spots to a created trail"""
+    pass
