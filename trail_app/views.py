@@ -133,6 +133,7 @@ def spot_edit(request, id):
             spot = form.save(commit=False)
             spot.location = form.data['spot_location']
             spot.name = form.data['spot_name']
+            spot.spot_on_trail = form.data['spot_on_trail']
             if 'spot_public' in form.data and form.data['spot_public'] == 'on':
                 spot.public = True
             else:
@@ -162,6 +163,7 @@ def trail_detail(request, id):
     """Trail Detail"""
 
     trail = get_object_or_404(Trail, id=id)
+    #spots_on_trail = Spot.objects.filter(spot_location=id)
     return render(request, 'trail_app/trail_detail.html', {'trail': trail})
 
 
@@ -194,7 +196,7 @@ def trail_edit(request, id):
         form = TrailForm(request.POST, instance=trail)
         if form.is_valid():
             trail = form.save(commit=False)
-            trail.spot = form.data['trail_spot']
+            #trail.spot = form.data['trail_spot']
             trail.location = form.data['trail_location']
             trail.name = form.data['trail_name']
 

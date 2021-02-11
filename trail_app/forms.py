@@ -11,11 +11,11 @@ class LocationForm(forms.ModelForm):
 class SpotForm(forms.ModelForm):
     class Meta:
         model = Spot
-        fields =('spot_location', 'spot_name', 'spot_public','spot_lon','spot_lat',)
+        fields =('spot_location', 'spot_name', 'spot_on_trail', 'spot_public','spot_lon','spot_lat',)
         
 
 class TrailForm(forms.ModelForm):
     class Meta:
         model = Trail
-        fields = ('trail_location', 'trail_spot', 'trail_name','trail_public','trail_lon','trail_lat',)
+        fields = ('trail_location', 'trail_name','trail_public','trail_lon','trail_lat',)
         
