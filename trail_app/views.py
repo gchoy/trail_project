@@ -108,6 +108,7 @@ def spot_new(request):
 
     if request.method == "POST":
         form = SpotForm(request.POST)
+        print(form)
         if form.is_valid():
             new_spot = form.save()
             return redirect(reverse('spot_detail', args=(new_spot.id,)))
@@ -167,11 +168,11 @@ def trail_detail(request, id):
 
 def trail_new(request):
     """Adding a new Trail. Users are able to create trails once signed in"""
-
+    
     if request.method == "POST":
         form = TrailForm(request.POST)
         if form.is_valid():
-            new_trail = form.save()
+            new_trail = form.save()    
             return redirect(reverse('trail_detail', args=(new_trail.id,)))
         else:
             return render(
@@ -212,6 +213,6 @@ def trail_edit(request, id):
 
 
 
-def add_spots_to_trail(request, id):
-    """Add spots to a created trail"""
-    pass
+#def add_spots_to_trail(request, id):
+#    """Add spots to a created trail"""
+#    pass

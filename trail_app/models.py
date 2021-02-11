@@ -40,3 +40,19 @@ class Trail(models.Model):
         lst = [x[1] for x in self.tags.values_list()]
         return str(lst.join(','))"""
         
+class Trail_Group(models.Model):
+    tg_name=models.CharField(max_length=250)
+    tg_start = models.OneToOneField(Location, unique=True,on_delete=models.CASCADE, blank=True, null=True,related_name='tg_start')
+    
+    tg_start_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
+    tg_start_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
+    tg_end = models.OneToOneField(Location, unique=True,on_delete=models.CASCADE, blank=True, null=True,related_name='tg_end')
+    
+    tg_end_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
+    tg_end_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
+    tg_public = models.BooleanField() 
+    tg_date = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.tg_name
