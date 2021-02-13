@@ -15,12 +15,18 @@
 
 {% block content %}
 <div class="spot">
-           <a class="btn btn-default" href="/spots/{{ spot.id }}/edit/"></a>
+           
          <p>{{ spot.spot_name|linebreaksbr }}</p>
          <p>{{ spot.spot_location|linebreaksbr}}</p>
          <p>{{ spot.spot_address|linebreaksbr }}</p>
          <p>{{ spot.spot_lat|linebreaksbr }}</p>
          <p>{{ spot.spot_lon|linebreaksbr }}</p>
+         
+         <br>
+         
+         <div>
+             <a class="btn btn-primary" href="/spots/{{spot.id}}/edit/">Edit Spot</a>
+         </div>
 </div>
 {% endblock %}
 

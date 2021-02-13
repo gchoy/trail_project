@@ -162,6 +162,7 @@ def trail_detail(request, id):
     """Trail Detail"""
 
     trail = get_object_or_404(Trail, id=id)
+    
     return render(request, 'trail_app/trail_detail.html', {'trail': trail})
 
 

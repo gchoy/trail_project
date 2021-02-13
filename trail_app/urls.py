@@ -16,5 +16,5 @@ urlpatterns = [
     path('trails', views.trails_list, name='trails_list'),
     path('trails/<int:id>/', views.trail_detail, name='trail_detail'),
     path('trails/new/', views.trail_new, name='trail_new'),
-    path('trails/<int:id>/edit', views.trail_edit, name='trail_edit'),
+    path('trails/<int:id>/edit/', views.trail_edit, name='trail_edit'),
 ]

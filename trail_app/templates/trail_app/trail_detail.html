@@ -15,12 +15,17 @@
 
 {% block content %}
 <div class="location">
-           <a class="btn btn-default" href="/trails/{{ trail.id }}/edit/"></a>
+           
          <p>{{ trail.trail_name|linebreaksbr }}</p>
          <p>{{ trail.trail_location|linebreaksbr }}</p>
          <p>{{ trail.trail_public|linebreaksbr }}</p>
          <p>{{ trail.trail_lat|linebreaksbr }}</p>
          <p>{{ trail.trail_lon|linebreaksbr }}</p>
+        
+         <br>
+         <div>
+            <a class="btn btn-primary" href="/trails/{{trail.id}}/edit/">Edit Trail</a>
+         </div>
 </div>
 {% endblock %}
 
