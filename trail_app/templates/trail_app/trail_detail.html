@@ -23,9 +23,29 @@
          <p>{{ trail.trail_lon|linebreaksbr }}</p>
         
          <br>
-         <div>
+          
+          <div>
             <a class="btn btn-primary" href="/trails/{{trail.id}}/edit/">Edit Trail</a>
          </div>
+         
+         <br>
+         <hr>
+         
+         <div class="spot">
+            <div>
+                <h3>Spots in the Trail</h2>
+            </div>
+
+            {% for spot in spots %}
+                <div>
+                    <h4><a href="/spots/{{spot.id}}/">{{ spot|linebreaksbr }}</a></h4>
+                </div>
+            {% endfor %}
+
+         </div>
+
+         
+         
 </div>
 {% endblock %}
 

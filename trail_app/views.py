@@ -152,7 +152,7 @@ def spot_edit(request, id):
 
 def trails_list(request):
     """List of Trails"""
- 
+  
     trails = list(Trail.objects.all())
 
     return render(request,
@@ -162,8 +162,9 @@ def trail_detail(request, id):
     """Trail Detail"""
 
     trail = get_object_or_404(Trail, id=id)
-    
-    return render(request, 'trail_app/trail_detail.html', {'trail': trail})
+    spots = trail.trail_spots.all()
+    print(spots)
+    return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots})
 
 
 
