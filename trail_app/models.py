@@ -29,7 +29,7 @@ class Spot(models.Model):
 class Trail(models.Model):
     trail_location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True)
     trail_name = models.CharField(max_length=250)
-    trail_spots = models.ManyToManyField(Spot, blank=True, null=True)
+    trail_spots = models.ManyToManyField(Spot, blank=True)
     trail_public = models.BooleanField()
     trail_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     trail_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)

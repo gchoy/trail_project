@@ -27,6 +27,17 @@
          <div>
              <a class="btn btn-primary" href="/spots/{{spot.id}}/edit/">Edit Spot</a>
          </div>
+         
+         
+         <br>
+         <hr>
+         
+         <div>
+         {% for trail in trails %}
+            <div>
+                <h4><a href="/trails/{{trail.id}}">{{trail|linebreaksbr}}</a></h4>
+            </div>
+         {% endfor %}
 </div>
 {% endblock %}
 

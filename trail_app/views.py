@@ -99,7 +99,9 @@ def spot_detail(request, id):
     """Spot Detail"""
 
     spot = get_object_or_404(Spot, id=id)
-    return render(request, 'trail_app/spot_detail.html', {'spot': spot})
+    trails = spot.trail_set.all()
+    
+    return render(request, 'trail_app/spot_detail.html', {'spot': spot, 'trails':trails})
 
 
 
@@ -163,7 +165,7 @@ def trail_detail(request, id):
 
     trail = get_object_or_404(Trail, id=id)
     spots = trail.trail_spots.all()
-    print(spots)
+    
     return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots})
 
 
@@ -208,6 +210,7 @@ def trail_edit(request, id):
             trail.lat = form.data['trail_lat']
             trail.lon = form.data['trail_lon']
             trail.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('trail_edit', args=(trail.id,)))
     else:
         form = TrailForm(instance=trail)
