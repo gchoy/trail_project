@@ -3,6 +3,9 @@ from . import views
 
 
 urlpatterns = [
+
+    path('', views.frontpage, name='frontpage'),
+    
     path('locations', views.locations_list, name='locations_list'),
     path('locations/<int:id>/', views.location_detail, name='location_detail'),
     path('locations/new/', views.location_new, name='location_new'),

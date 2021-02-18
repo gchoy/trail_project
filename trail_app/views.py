@@ -4,6 +4,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
 
+
+
+#Frontpage view
+def frontpage(request):
+    return render (request, 'frontpage.html')
+
+
+
 #Location views
 
 def locations_list(request):

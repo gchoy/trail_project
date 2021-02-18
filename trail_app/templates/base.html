@@ -11,19 +11,36 @@
   <meta charset="utf-8">
 
   <!--title-->
-  <title>{% block title %}Create your own tours{% endblock %}</title>
+  <title>{% block title %}Trail Cache{% endblock %}</title>
 
 </head>
 
 <body>
-  {% block navigation %}
-
  
+    <!-- navbar -->
+    <div id="navbar-app">
     <nav  class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">About</a>
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item"><strong>Trail Cache</strong></a>         
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+
+        <div class="navbar menu">
+            <div class="navbar-end">
+                 <a href="#" class="navbar=item">Plans</a>
+
+                 <div class="navbar-item">
+                     <div class="buttons">
+                         <a href="#" class="button is-success"><strong>Sign up</strong></a>
+                         <a href="#" class="button"><strong>Log in</strong></a>
+
+                     </div>
+                 </div>
+            </div>
+   
+        </div>
+        <!--div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'locations_list' %}">Locations</a></li>
                 <li><a href="#">Trails</a></li>
@@ -32,22 +49,59 @@
                <li><a href="#">Place Holder</a></li>
                <li><a href="#">Place Holder</a></li>
                <li><a href="#">Place Holder</a></li>
-               <li><a href="#">Logout</a></li>
+               <li><a href="#">Place Holder</a></li>
                <li><a href="#">Login</a></li>
                <li><a href="#">Sign Up</a></li>
             </ul>
-        </div>
+        </div-->
     </nav>
-  {% endblock %}
+    </div>
+    <!-- end navbar -->
 
-  <div class="container">
-    <h1>{% block title_orig %}Trail Cache{% endblock %}</h1>
+    <!-- Main -->
 
-    <div class="row">
-      {% block content %}(no content){% endblock %}
-      {% bootstrap_messages %}
-    </div><!-- end outside most row -->
-  </div><!-- end container -->
+    <section class="section">
+        {% block content %}
+
+
+        {% endblock %}
+    </section>
+    <!--End Main--> 
+    
+    <!-- Footer -->
+    <footer class="container footer">
+        <div class="row justify-content-md-center">
+           <div class="row align-items-center">
+               <div class = "col-12">
+                  <h2class="subtitle">Trail Cache</h2>
+               </div>
+            
+           </div>
+            
+        </div>
+        <div class="row justify-content-md-center">
+           <div class="row align-items-center">
+               <div class = "col-12">
+                 
+                      <a href="#">Contact</a>
+                      <a href="#">Privacy policy</a>
+                      <a href="#">Terms of service</a>
+               </div>
+            
+           </div>
+        </div>
+        <div class="row justify-content-md-center">
+           <div class="row align-items-center">
+               <div class = "col-12">
+                  <h2class="subtitle">Copyright (c) 2021</h2>
+               </div>
+            
+           </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+  
 </body>
 </html>
 
