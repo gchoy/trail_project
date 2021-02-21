@@ -1,6 +1,31 @@
 {% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
 
 {% block title %} Sign up| {% endblock %}
 
 {% block content %}
+<section class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="jumbotron-text">
+            <h1 class="title">Sign up</h1>
+            <h2 class="subtitle">Get a free trial and start creating your own tours</h2>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+  <div class= "col-6">
+     <form action="{% url 'signup' %}" method="post">
+       {% csrf_token %}
+       {{ form.as_p }}
+        {% buttons %}
+         <button type="submit" value="signup" class="btn btn-primary">
+             Signup
+         </button>
+        {% endbuttons %}
+     </form>
+  </div>
+</div>
 {% endblock %}
