@@ -25,6 +25,16 @@
              Signup
          </button>
         {% endbuttons %}
+
+       {% if form.errors %}
+           <div class="alert alert-danger" role="alert">
+                 {{ form.non_field_errors }}
+
+                 {% for field in form %}
+                     {% if field.errors %} {{ field.label }}: {{ field.errors|striptags }} {% endif %}
+                 {% endfor %} 
+           </div>
+       {% endif %}
      </form>
   </div>
 </div>
