@@ -1,0 +1,23 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} My account| {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'myaccount' %}" aria-current="page">My account</a></li>
+                    
+                </ol>
+            </nav>
+        </div>
+</div>
+
+{% endblock %}
