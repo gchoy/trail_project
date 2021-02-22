@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} Log in| {% endblock %}
+
+{% block content %}
+<section class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="jumbotron-text">
+            <h1 class="title">Login into your account and start creating tours</h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+  <div class= "col-6">
+     <form action="{% url 'login' %}" method="post">
+       {% csrf_token %}
+       {{ form.as_p }}
+        {% buttons %}
+         <button type="submit" value="login" class="btn btn-primary">
+             Login
+         </button>
+        {% endbuttons %}
+
+       {% if form.errors %}
+           <div class="alert alert-danger" role="alert">
+                 {{ form.non_field_errors }}
+
+                 {% for field in form %}
+                     {% if field.errors %} {{ field.label }}: {{ field.errors|striptags }} {% endif %}
+                 {% endfor %} 
+           </div>
+       {% endif %}
+     </form>
+  </div>
+</div>
+{% endblock %}
