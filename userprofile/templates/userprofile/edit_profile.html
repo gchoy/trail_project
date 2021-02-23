@@ -1,0 +1,22 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} Edit profile| {% endblock %}
+
+{% block content %}
+<div class="row">
+    
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'myaccount' %}">My account</a></li> 
+                    <li class="breadcrumb-item active"><a href="{% url 'edit_profile' %}" aria-current="page">Edit profile</a></li>
+                    
+                </ol>
+        </nav>
+    
+</div>
+
+{% endblock %}
