@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from userprofile.views import signup, myaccount
+from userprofile.views import signup, myaccount, edit_profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='userprofile/login.html'), name='login'),
     path('logout/',auth_views.LogoutView.as_view(), name='logout'),
     path('myaccount/', myaccount, name='myaccount'),
-    path('myaccount/edit_profile', myaccount, name='edit_profile'),
+    path('myaccount/edit_profile/', edit_profile, name='edit_profile'),
 ]
