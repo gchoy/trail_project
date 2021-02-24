@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -8,6 +9,7 @@ class Location(models.Model):
     lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User,related_name='created_locations',on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -20,6 +22,7 @@ class Spot(models.Model):
     spot_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     spot_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     spot_date = models.DateTimeField(auto_now_add=True)
+    spot_by = models.ForeignKey(User,related_name='created_spots',on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.spot_name
@@ -34,7 +37,7 @@ class Trail(models.Model):
     trail_lon = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     trail_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     trail_date = models.DateTimeField(auto_now_add=True)
-    
+    trail_by = models.ForeignKey(User,related_name='created_trails',on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
         return self.trail_name
@@ -59,6 +62,7 @@ class Trail_Group(models.Model):
     tg_end_lat = models.DecimalField(max_digits=22, decimal_places=16, blank=True, null=True)
     tg_public = models.BooleanField() 
     tg_date = models.DateTimeField(auto_now_add=True)
+    tg_by = models.ForeignKey(User,related_name='created_tgs',on_delete=models.CASCADE, blank=True, null=True)
 
 
     def __str__(self):
