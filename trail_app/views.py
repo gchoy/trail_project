@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
@@ -13,7 +14,7 @@ def frontpage(request):
 
 
 #Location views
-
+@login_required
 def locations_list(request):
     """List of Locations"""
  
@@ -22,9 +23,9 @@ def locations_list(request):
     return render(request,
                   'trail_app/locations_list.html',{'locations': locations})
 
+@login_required
 def location_detail(request, id):
     """Location Detail"""
-    
     location = get_object_or_404(Location, id=id)
     spots_on_location = Spot.objects.filter(spot_location=id)
     trails_on_location = Trail.objects.filter(trail_location=id)
@@ -35,7 +36,7 @@ def location_detail(request, id):
           {'location': location, 'spots_on_location': spots_on_location, 'trails_on_location': trails_on_location})
     
 
-
+@login_required
 def location_new(request):
     """Adding a new Location. Users are able to add a new location once signed in"""
 
@@ -57,7 +58,7 @@ def location_new(request):
                       {'form': form})
 
 
-
+@login_required
 def location_edit(request, id):
     location = get_object_or_404(Location, id=id)
     if request.method == "POST":
@@ -78,14 +79,14 @@ def location_edit(request, id):
         form = LocationForm(instance=location)
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
 
-
+@login_required
 def show_spots_on_location(request, location_id):
     """Show the spots linked to a spot"""
     
     spots_on_location = Spot.objects.filter(spot_location=location.id)
     return render(request, 'trail_app/location_detail.html', {'spots_on_location': spots_on_location,'location_id': location.id})
     
-
+@login_required
 def show_trails_on_locations(request, id):
     """Show the trails linked to a location"""
     pass
@@ -95,6 +96,7 @@ def show_trails_on_locations(request, id):
 
 #Spot views
 
+@login_required
 def spots_list(request):
     """List of Spots"""
  
@@ -102,7 +104,7 @@ def spots_list(request):
 
     return render(request,
                   'trail_app/spots_list.html',{'spots': spots})
-
+@login_required
 def spot_detail(request, id):
     """Spot Detail"""
 
@@ -112,7 +114,7 @@ def spot_detail(request, id):
     return render(request, 'trail_app/spot_detail.html', {'spot': spot, 'trails':trails})
 
 
-
+@login_required
 def spot_new(request):
     """Adding a new Spot. Users are able to add a new spot once signed in"""
 
@@ -134,7 +136,7 @@ def spot_new(request):
                       'trail_app/spot_new.html',
                       {'form': form})
 
-
+@login_required
 def spot_edit(request, id):
     spot = get_object_or_404(Spot, id=id)
     if request.method == "POST":
@@ -159,7 +161,7 @@ def spot_edit(request, id):
 
 
 #Trails views
-
+@login_required
 def trails_list(request):
     """List of Trails"""
   
@@ -167,7 +169,7 @@ def trails_list(request):
 
     return render(request,
                   'trail_app/trails_list.html',{'trails': trails})
-
+@login_required
 def trail_detail(request, id):
     """Trail Detail"""
 
@@ -177,7 +179,7 @@ def trail_detail(request, id):
     return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots})
 
 
-
+@login_required
 def trail_new(request):
     """Adding a new Trail. Users are able to create trails once signed in"""
     
@@ -199,7 +201,7 @@ def trail_new(request):
                       {'form': form})
 
 
-
+@login_required
 def trail_edit(request, id):
     trail = get_object_or_404(Trail, id=id)
     if request.method == "POST":
@@ -226,6 +228,3 @@ def trail_edit(request, id):
 
 
 
-#def add_spots_to_trail(request, id):
-#    """Add spots to a created trail"""
-#    pass
