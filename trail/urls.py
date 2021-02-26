@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 
 from trail_app.views import frontpage
 from userprofile.views import signup, myaccount, edit_profile
+from dashboard.views import dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(), name='logout'),
     path('myaccount/', myaccount, name='myaccount'),
     path('myaccount/edit_profile/', edit_profile, name='edit_profile'),
+    path('myaccount/dashboard/', dashboard, name='dashboard'),
 ]
