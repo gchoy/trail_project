@@ -25,7 +25,7 @@
          <br>
          
          <div> 
-             <a class="btn btn-primary" href="/locations/{{location.id}}/edit/">Edit Location</a>
+             <a class="btn btn-primary" href="{% url 'location_edit' location.id %}">Edit Location</a>
          </div>
          
          <br>
@@ -38,7 +38,7 @@
             
             {% for spot in spots_on_location %}
                 <div>
-                    <h4><a href="/spots/{{spot.id}}/">{{ spot|linebreaksbr }}</a></h4>
+                    <h4><a href="{% url 'spot_detail' spot.id %}">{{ spot|linebreaksbr }}</a></h4>
                 </div>
             {% endfor %} 
                   

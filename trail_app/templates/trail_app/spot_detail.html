@@ -26,17 +26,17 @@
          <br>
          
          <div>
-             <a class="btn btn-primary" href="/spots/{{spot.id}}/edit/">Edit Spot</a>
+             <a class="btn btn-primary" href="{% url 'spot_edit' spot.id %}">Edit Spot</a>
          </div>
          
-         
+                   
          <br>
          <hr>
          
          <div>
          {% for trail in trails %}
             <div>
-                <h4><a href="/trails/{{trail.id}}">{{trail|linebreaksbr}}</a></h4>
+                <h4><a href="{% url 'trail_detail' trail.id %}">{{trail|linebreaksbr}}</a></h4>
             </div>
          {% endfor %}
 </div>

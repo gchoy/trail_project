@@ -22,7 +22,7 @@ from userprofile.views import signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('trail_app.urls')),
+    #path('', include('trail_app.urls')),
     path('', frontpage, name='frontpage'), 
     
     path('dashboard/', include('dashboard.urls')),
