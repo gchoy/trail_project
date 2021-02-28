@@ -20,13 +20,82 @@
     
 </div>
 
+<br>
+<hr>
+<br>
 
-<div class="row">
-   <div class="col-6">
-      {{hello}} 
-   </div>
-
-        
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+             <h5 class="card-title">Locations</h5>
+             <p class="card-text">See all your created locations</p>
+             <a href="{% url 'locations_list' %}" class="btn btn-primary">Show</a>
+          </div>
+      </div>
+    </div>
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Spots</h5>
+                <p class="card-text">See all your created locations</p>
+                <a href="{% url 'spots_list' %}" class="btn btn-primary">Show</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Trails</h5>
+                <p class="card-text">See all your created locations</p>
+                <a href="{% url 'trails_list' %}" class="btn btn-primary">Show</a>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>
 
+
+<br>
+<hr>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+             <h5 class="card-title">Locations</h5>
+             <p class="card-text">See all public locations or create your own</p>
+             <a href="{% url 'locations_list' %}" class="btn btn-primary">Show</a>
+          </div>
+      </div>
+    </div>
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Spots</h5>
+                <p class="card-text">See all public spots or create your own</p>
+                <a href="{% url 'spots_list' %}" class="btn btn-primary">Show</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Trails</h5>
+                <p class="card-text">See all public trails or create your own</p>
+                <a href="{% url 'trails_list' %}" class="btn btn-primary">Show</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
