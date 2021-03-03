@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
 
-
+import datetime
 
 #Frontpage view
 def frontpage(request):
@@ -18,7 +18,7 @@ def frontpage(request):
 def locations_list(request):
     """List of Locations"""
  
-    locations = list(Location.objects.all())
+    locations = list(Location.objects.filter(public='True'))
 
     return render(request,
                   'trail_app/locations_list.html',{'locations': locations})
@@ -27,14 +27,16 @@ def locations_list(request):
 def location_detail(request, id):
     """Location Detail"""
     location = get_object_or_404(Location, id=id)
-    spots_on_location = Spot.objects.filter(spot_location=id)
-    trails_on_location = Trail.objects.filter(trail_location=id)
-    
+    spots_on_location = Spot.objects.filter(spot_location=id).filter(spot_public='True')
+    trails_on_location = Trail.objects.filter(trail_location=id).filter(trail_public='True')
+     
     return render(
           request,
           'trail_app/location_detail.html', 
           {'location': location, 'spots_on_location': spots_on_location, 'trails_on_location': trails_on_location})
     
+
+
 
 @login_required
 def location_new(request):
@@ -43,7 +45,26 @@ def location_new(request):
     if request.method == "POST":
         form = LocationForm(request.POST)
         if form.is_valid():
-            new_location = form.save()
+            name = form.data['name']
+            address = form.data['address']
+            lat = form.data['lat']
+            lon = form.data['lon']
+            user =  request.user
+            new_location = Location()
+            new_location.name = name
+            new_location.address = address
+
+            if 'public' in form.data and form.data['public'] == 'on':
+                new_location.public = True
+            else:
+                new_location.public = False
+
+            new_location.lat = lat
+            new_location.lon = lon
+            new_location.date = datetime.datetime.now()
+            new_location.created_by = user
+            new_location.save()
+ 
             return redirect(reverse('location_detail', args=(new_location.id,)))
         else:
             return render(
@@ -79,20 +100,6 @@ def location_edit(request, id):
         form = LocationForm(instance=location)
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
 
-@login_required
-def show_spots_on_location(request, location_id):
-    """Show the spots linked to a spot"""
-    
-    spots_on_location = Spot.objects.filter(spot_location=location.id)
-    return render(request, 'trail_app/location_detail.html', {'spots_on_location': spots_on_location,'location_id': location.id})
-    
-@login_required
-def show_trails_on_locations(request, id):
-    """Show the trails linked to a location"""
-    pass
-
-
-
 
 #Spot views
 
@@ -100,7 +107,7 @@ def show_trails_on_locations(request, id):
 def spots_list(request):
     """List of Spots"""
  
-    spots = list(Spot.objects.all())
+    spots = list(Spot.objects.filter(spot_public='True'))
 
     return render(request,
                   'trail_app/spots_list.html',{'spots': spots})
@@ -109,7 +116,7 @@ def spot_detail(request, id):
     """Spot Detail"""
 
     spot = get_object_or_404(Spot, id=id)
-    trails = spot.trail_set.all()
+    trails = spot.trail_set.filter(trail_public='True')
     
     return render(request, 'trail_app/spot_detail.html', {'spot': spot, 'trails':trails})
 
@@ -120,9 +127,28 @@ def spot_new(request):
 
     if request.method == "POST":
         form = SpotForm(request.POST)
-        print(form)
+        
         if form.is_valid():
-            new_spot = form.save()
+            spot_location = form.cleaned_data['spot_location']
+            spot_name = form.cleaned_data['spot_name']
+            spot_lat = form.data['spot_lat']
+            spot_lon = form.data['spot_lon']
+            user =  request.user
+            new_spot = Spot()
+            new_spot.spot_location = spot_location 
+            new_spot.spot_name = spot_name
+
+            if 'public' in form.data and form.data['spot_public'] == 'on':
+                new_spot.spot_public = True
+            else:
+                new_spot.spot_public = False
+
+            new_spot.spot_lat = spot_lat
+            new_spot.spot_lon = spot_lon
+            new_spot.spot_date = datetime.datetime.now()
+            new_spot.spot_by = user
+            new_spot.save()
+
             return redirect(reverse('spot_detail', args=(new_spot.id,)))
         else:
             return render(
@@ -165,7 +191,7 @@ def spot_edit(request, id):
 def trails_list(request):
     """List of Trails"""
   
-    trails = list(Trail.objects.all())
+    trails = list(Trail.objects.filter(trail_public='True'))
 
     return render(request,
                   'trail_app/trails_list.html',{'trails': trails})
@@ -174,7 +200,7 @@ def trail_detail(request, id):
     """Trail Detail"""
 
     trail = get_object_or_404(Trail, id=id)
-    spots = trail.trail_spots.all()
+    spots = trail.trail_spots.filter(spot_public='True')
     
     return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots})
 
@@ -186,8 +212,23 @@ def trail_new(request):
     if request.method == "POST":
         form = TrailForm(request.POST)
         if form.is_valid():
-            new_trail = form.save()    
-            return redirect(reverse('trail_detail', args=(new_trail.id,)))
+            trail = form.save(commit=False)
+            trail.location = form.cleaned_data['trail_location']
+            trail.name = form.cleaned_data['trail_name']
+            trail.spots = form.data['trail_spots']
+            trail.lat = form.data['trail_lat']
+            trail.lon = form.data['trail_lon']
+            user =  request.user
+
+            if 'public' in form.data and form.data['trail_public'] == 'on':
+                trail.public = True
+            else:
+                trail.public = False
+
+            trail.trail_date = datetime.datetime.now()
+            trail.trail_by = request.user
+            trail.save()
+            return redirect(reverse('trail_detail', args=(trail.id,)))
         else:
             return render(
                 request,

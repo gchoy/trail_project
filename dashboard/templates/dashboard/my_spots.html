@@ -1,0 +1,22 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} Dashboard| {% endblock %}
+
+<div>
+    <h1><a href="/">My Trail Spots</a></h1>
+</div>
+
+{% block content %}
+{% for spot in myspots %}
+    <div>
+        <p>created: {{ spot.spot_date }}</p>
+        <h2><a href="{% url 'spot_detail' id=spot.id %}">{{ spot.spot_name }}</a></h2>
+
+    </div>
+{% endfor %}
+
+
+{% endblock %}
