@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
-{% block title %}
-<div class="container">
-  <div class="row">
-     <div>
-        <h2>Trail Editing</h2>
-     </div>
-  </div>
-</div>
-{% endblock %}
+
+
+{% block title %}Trail Editing{% endblock %}
 
 {% block content %}
 <form action="{% url 'trail_edit' trail.id %}" method="post">

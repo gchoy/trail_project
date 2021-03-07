@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
@@ -100,6 +101,15 @@ def location_edit(request, id):
         form = LocationForm(instance=location)
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
 
+@login_required
+def location_delete(request, id):
+    location = get_object_or_404(Location, id=id)
+    location.delete()
+
+    messages.info(request, 'The location was deleted!')
+
+    return redirect('mylocations')
+
 
 #Spot views
 
@@ -184,6 +194,15 @@ def spot_edit(request, id):
         form = SpotForm(instance=spot)
     return render(request, 'trail_app/spot_edit.html', {'spot': spot, 'form': form})
 
+@login_required
+def spot_delete(request, id):
+    spot = get_object_or_404(Spot, id=id)
+    spot.delete()
+
+    messages.info(request, 'The spot was deleted!')
+
+    return redirect('myspots')
+
 
 
 #Trails views
@@ -266,6 +285,15 @@ def trail_edit(request, id):
     else:
         form = TrailForm(instance=trail)
     return render(request, 'trail_app/trail_edit.html', {'trail': trail, 'form': form})
+
+@login_required
+def trail_delete(request, id):
+    trail = get_object_or_404(Trail, id=id)
+    trail.delete()
+
+    messages.info(request, 'The trail was deleted!')
+
+    return redirect('mytrails')
 
 
 

@@ -25,7 +25,8 @@
          <br>
          
          <div> 
-             <a class="btn btn-primary" href="{% url 'location_edit' location.id %}">Edit Location</a>
+             <a class="btn btn-primary" href="{% url 'location_edit' location.id %}">Edit</a>
+             <a class="btn btn-danger" href="{% url 'location_delete' location.id %}">Delete</a>
          </div>
          
          <br>

@@ -1,0 +1,80 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} Dashboard| {% endblock %}
+
+
+
+{% block content %}
+
+
+<div class>
+         
+         <p>{{ mylocation.name|linebreaksbr }}</p>
+         <p>{{ mylocation.address|linebreaksbr }}</p>
+         <p>{{ mylocation.lat|linebreaksbr }}</p>
+         <p>{{ mylocation.lon|linebreaksbr }}</p>
+         <p>{{ mylocation.date|linebreaksbr}}</p>
+         <p>{{ mylocation.created_by|linebreaksbr}}</p>          
+         <br>
+         
+         <div> 
+              <a class="btn btn-primary" href="{% url 'trail_edit' mylocation.id %}">Edit</a>
+              <a class="btn btn-danger" href="{% url 'trail_delete' mylocation.id %}">Delete</a>
+         </div>
+         
+         <br>
+         <hr>         
+                    
+         <div class="spot">
+            <div>
+                <h3>Spots</h2>
+            </div>
+            
+            {% for spot in myspots_on_location %}
+                <div>
+                    <h4><a href="{% url 'myspot_detail' spot.id %}">{{ spot|linebreaksbr }}</a></h4>
+                </div>
+            {% endfor %} 
+                  
+         </div>
+         
+         <br>
+         <hr>
+         
+         <div class="trail">
+            <div>
+               <h3>Trails</h2>
+            </div>
+                                                  
+            {% for trail in mytrails_on_location %}
+               <div>
+                   <h4><a href="{% url 'mytrail_detail' trail.id %}">{{ trail|linebreaksbr }}</a></h4>
+               </div>
+            {% endfor %}
+                                                                                                                              
+         </div>
+                                                                                                                                       
+         
+         
+         
+         
+         
+         
+            
+</div>                  
+
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'location_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
+
+
+{% endblock %}

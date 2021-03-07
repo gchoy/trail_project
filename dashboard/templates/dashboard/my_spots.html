@@ -5,18 +5,27 @@
 
 {% block title %} Dashboard| {% endblock %}
 
-<div>
-    <h1><a href="/">My Trail Spots</a></h1>
-</div>
+
 
 {% block content %}
 {% for spot in myspots %}
     <div>
+        
+        <h2><a href="{% url 'myspot_detail' id=spot.id %}">{{ spot.spot_name }}</a></h2>
         <p>created: {{ spot.spot_date }}</p>
-        <h2><a href="{% url 'spot_detail' id=spot.id %}">{{ spot.spot_name }}</a></h2>
 
     </div>
 {% endfor %}
+
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'spot_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
 
 
 {% endblock %}

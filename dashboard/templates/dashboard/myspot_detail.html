@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block title %} Dashboard| {% endblock %}
+
+
+
+{% block content %}
+<div class>
+           
+         <p>{{ myspot.spot_name|linebreaksbr }}</p>
+         <p>{{ myspot.spot_location|linebreaksbr}}</p>
+         <p>{{ myspot.spot_address|linebreaksbr }}</p>
+         <p>{{ myspot.spot_lat|linebreaksbr }}</p>
+         <p>{{ myspot.spot_lon|linebreaksbr }}</p>
+         <p>{{ myspot.spot_date|linebreaksbr }}</p>
+         <p>{{ myspot.spot_by|linebreaksbr }}</p>
+         <br>
+         
+         <div>
+              <a class="btn btn-primary" href="{% url 'spot_edit' myspot.id %}">Edit</a>
+              <a class="btn btn-danger" href="{% url 'spot_delete' myspot.id %}">Delete</a>
+         </div>
+         
+                   
+         <br>
+         <hr>
+         
+         <div>
+         {% for trail in mytrails %}
+            <div>
+                <h4><a href="{% url 'mytrail_detail' trail.id %}">{{trail|linebreaksbr}}</a></h4>
+            </div>
+         {% endfor %}
+</div>
+
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'spot_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
+
+
+{% endblock %}

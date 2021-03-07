@@ -5,18 +5,26 @@
 
 {% block title %} Dashboard| {% endblock %}
 
-<div>
-    <h1><a href="/">Trails at a Location</a></h1>
-</div>
 
 {% block content %}
 {% for trail in mytrails %}
     <div>
-        <p>created: {{ trail.trail_date }}</p>
+        
         <h2><a href="{% url 'trail_detail' id=trail.id %}">{{ trail.trail_name }}</a></h2>
+        <p>created: {{ trail.trail_date }}</p>
 
     </div>
 {% endfor %}
+
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'trail_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
 
 
 {% endblock %}

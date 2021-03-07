@@ -33,9 +33,9 @@
              <h5 class="card-title">Locations</h5>
              <p class="card-text">See all your created locations</p>
              <a href="{% url 'mylocations' %}" class="btn btn-primary">Show</a>
+             <a href="{% url 'location_new' %}" class="btn btn-primary">Add</a>
           </div>
       </div>
-      <a href="{% url 'location_new' %}" class="btn btn-primary">Add Location</a>
     </div>
     <div class="col">
         <div class="card" style="width: 18rem;">
@@ -44,9 +44,9 @@
                 <h5 class="card-title">Spots</h5>
                 <p class="card-text">See all your created locations</p>
                 <a href="{% url 'myspots' %}" class="btn btn-primary">Show</a>
+                <a href="{% url 'spot_new' %}" class="btn btn-primary">Add</a>
             </div>
         </div>
-        <a href="{% url 'spot_new' %}" class="btn btn-primary">Add Spot</a>
     </div>
     <div class="col">
       <div class="card" style="width: 18rem;">
@@ -55,11 +55,10 @@
                 <h5 class="card-title">Trails</h5>
                 <p class="card-text">See all your created locations</p>
                 <a href="{% url 'mytrails' %}" class="btn btn-primary">Show</a>
+                <a href="{% url 'trail_new' %}" class="btn btn-primary">Add</a>
             </div>
         </div>
-       <a href="{% url 'trail_new' %}" class="btn btn-primary">Add Trail</a>
-    </div>
-    
+      </div>
   </div>
 </div>
 
