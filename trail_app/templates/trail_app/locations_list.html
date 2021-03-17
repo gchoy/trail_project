@@ -1,17 +1,65 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-<div>
-    <h1><a href="/">Trail Locations</a></h1>
+
+{% block content %} 
+
+
+<div class="row">
+    
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>                   
+                </ol>
+        </nav>
+    
 </div>
 
-{% block content %}    
-{% for location in locations %}
+<br>
+<hr>
+<br>  
+
+
+<div>
+    <h1>My Locations</h1>
+</div>
+
+<br>
+
+{% for mylocation in userlocations %}
     <div>
-        <p>created: {{ location.date }}</p>
-        <h2><a href="{% url 'location_detail' id=location.id %}">{{ location.name }}</a></h2>
-        
+        <h2><a href="{% url 'location_detail' id=mylocation.id %}">{{ mylocation.name }}</a></h2>
+        <p>created: {{ mylocation.date }}</p>
     </div>
 {% endfor %}
+
+<br>
+<hr>
+<br>
+
+
+<div>
+    <h1>All Locations</h1>
+</div>
+
+<br>
+
+{% for location in locations %}
+    <div>
+        <h2><a href="{% url 'location_detail' id=location.id %}">{{ location.name }}</a></h2>
+        <p>created: {{ location.date }}</p>
+    </div>
+{% endfor %}
+
+<br>
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'location_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
 
 
 {% endblock %}

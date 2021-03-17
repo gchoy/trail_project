@@ -1,17 +1,66 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-<div>
-    <h1><a href="/">Trail Spots</a></h1>
-</div>
+
 
 {% block content %}
-{% for spot in spots %}
-    <div>
-        <p>created: {{ spot.spot_date }}</p>
-        <h2><a href="{% url 'spot_detail' id=spot.id %}">{{ spot.spot_name }}</a></h2>
 
+<div class="row">
+    
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>                   
+                </ol>
+        </nav>
+    
+</div>
+
+<br>
+<hr>
+<br>  
+
+<div>
+    <h1>My Spots</h1>
+</div>
+
+<br>
+
+{% for myspot in userspots %}
+    <div>
+        <h2><a href="{% url 'spot_detail' id=myspot.id %}">{{ myspot.spot_name }}</a></h2>
+        <p>created: {{ myspot.spot_date }}</p>
     </div>
 {% endfor %}
+
+
+<br>
+<hr>
+<br>
+
+<div>
+    <h1>All Spots</h1>
+</div>
+
+<br>
+
+{% for spot in spots %}
+    <div>
+        <h2><a href="{% url 'spot_detail' id=spot.id %}">{{ spot.spot_name }}</a></h2>
+        <p>created: {{ spot.spot_date }}</p>
+    </div>
+{% endfor %}
+
+
+<br>
+<hr>
+<br>
+
+<div class="row justify-content-end">
+    <div class="col-sm-1 offset-md-12">
+      <a href="{% url 'spot_new' %}" class="btn btn-primary">Add</a>
+    </div>
+
+</div>
+
 
 
 {% endblock %}

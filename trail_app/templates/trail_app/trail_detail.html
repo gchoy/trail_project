@@ -14,7 +14,24 @@
 {% endblock %}
 
 {% block content %}
-<div class="location">
+
+<div class="row">
+    
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'trails_list' %}">Trails</a></li>
+                    
+                </ol>
+        </nav>
+    
+</div>
+
+<br>
+<hr>
+<br>
+
+<div class="info">
            
          <p>{{ trail.trail_name|linebreaksbr }}</p>
          <p>{{ trail.trail_location|linebreaksbr }}</p>
@@ -37,6 +54,14 @@
             <div>
                 <h3>Spots in the Trail</h2>
             </div>
+
+            {% for uspot in userspots %}
+                <div>
+                    <h4><a href="{% url 'spot_detail' uspot.id %}">{{ uspot|linebreaksbr }}</a></h4>
+                </div>
+            {% endfor %}
+           
+            <br>
 
             {% for spot in spots %}
                 <div>

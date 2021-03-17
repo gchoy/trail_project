@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
+#from .decorators import user_is_entry_author
 
 import datetime
 
@@ -20,9 +21,10 @@ def locations_list(request):
     """List of Locations"""
  
     locations = list(Location.objects.filter(public='True'))
+    userlocations = Location.objects.filter(created_by=request.user)
 
     return render(request,
-                  'trail_app/locations_list.html',{'locations': locations})
+                  'trail_app/locations_list.html',{'locations': locations, 'userlocations': userlocations})
 
 @login_required
 def location_detail(request, id):
@@ -30,11 +32,14 @@ def location_detail(request, id):
     location = get_object_or_404(Location, id=id)
     spots_on_location = Spot.objects.filter(spot_location=id).filter(spot_public='True')
     trails_on_location = Trail.objects.filter(trail_location=id).filter(trail_public='True')
+
+    userspots_on_location = Spot.objects.filter(spot_location=id).filter(spot_by=request.user)
+    usertrails_on_location = Trail.objects.filter(trail_location=id).filter(trail_by=request.user)
      
     return render(
           request,
           'trail_app/location_detail.html', 
-          {'location': location, 'spots_on_location': spots_on_location, 'trails_on_location': trails_on_location})
+          {'location': location, 'spots_on_location': spots_on_location, 'trails_on_location': trails_on_location, 'userspots_on_location': userspots_on_location, 'usertrails_on_location': usertrails_on_location})
     
 
 
@@ -108,7 +113,7 @@ def location_delete(request, id):
 
     messages.info(request, 'The location was deleted!')
 
-    return redirect('mylocations')
+    return redirect('locations_list')
 
 
 #Spot views
@@ -118,17 +123,20 @@ def spots_list(request):
     """List of Spots"""
  
     spots = list(Spot.objects.filter(spot_public='True'))
+    userspots = Spot.objects.filter(spot_by=request.user)
 
     return render(request,
-                  'trail_app/spots_list.html',{'spots': spots})
+                  'trail_app/spots_list.html',{'spots': spots, 'userspots': userspots})
 @login_required
 def spot_detail(request, id):
     """Spot Detail"""
 
     spot = get_object_or_404(Spot, id=id)
     trails = spot.trail_set.filter(trail_public='True')
+    usertrails = spot.trail_set.filter(trail_by=request.user)
+    print(usertrails)
     
-    return render(request, 'trail_app/spot_detail.html', {'spot': spot, 'trails':trails})
+    return render(request, 'trail_app/spot_detail.html', {'spot': spot, 'trails':trails, 'usertrails':usertrails})
 
 
 @login_required
@@ -201,7 +209,7 @@ def spot_delete(request, id):
 
     messages.info(request, 'The spot was deleted!')
 
-    return redirect('myspots')
+    return redirect('spots_list')
 
 
 
@@ -211,17 +219,21 @@ def trails_list(request):
     """List of Trails"""
   
     trails = list(Trail.objects.filter(trail_public='True'))
+    usertrails = Trail.objects.filter(trail_by=request.user)
 
     return render(request,
-                  'trail_app/trails_list.html',{'trails': trails})
+                  'trail_app/trails_list.html',{'trails': trails, 'usertrails': usertrails})
 @login_required
 def trail_detail(request, id):
     """Trail Detail"""
 
     trail = get_object_or_404(Trail, id=id)
     spots = trail.trail_spots.filter(spot_public='True')
+    print(spots)
+    userspots = trail.trail_spots.filter(spot_by=request.user)
+    print(userspots)
     
-    return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots})
+    return render(request, 'trail_app/trail_detail.html', {'trail': trail, 'spots':spots,'userspots':userspots})
 
 
 @login_required
@@ -247,6 +259,7 @@ def trail_new(request):
             trail.trail_date = datetime.datetime.now()
             trail.trail_by = request.user
             trail.save()
+            form.save_m2m()
             return redirect(reverse('trail_detail', args=(trail.id,)))
         else:
             return render(
@@ -293,7 +306,7 @@ def trail_delete(request, id):
 
     messages.info(request, 'The trail was deleted!')
 
-    return redirect('mytrails')
+    return redirect('trails_list')
 
 
 

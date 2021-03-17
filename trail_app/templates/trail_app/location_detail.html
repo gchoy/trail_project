@@ -14,7 +14,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="location">
+
+
+<div class="row">
+    
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'locations_list' %}">Locations</a></li>
+                    
+                </ol>
+        </nav>
+    
+</div>
+
+<br>
+<hr>
+<br>
+
+<div class="info">
          
          <p>{{ location.name|linebreaksbr }}</p>
          <p>{{ location.address|linebreaksbr }}</p>
@@ -30,20 +48,30 @@
          </div>
          
          <br>
-         <hr>         
+         <hr>
+
+                  
                     
          <div class="spot">
             <div>
                 <h3>Spots</h2>
             </div>
-            
+          
+
+               {% for uspot in userspots_on_location %}
+                  <div>
+                     <h4><a href="{% url 'spot_detail' uspot.id %}">{{ uspot|linebreaksbr }}</a></h4>
+                  </div>
+               {% endfor %}
+
+            <br>
             {% for spot in spots_on_location %}
                 <div>
                     <h4><a href="{% url 'spot_detail' spot.id %}">{{ spot|linebreaksbr }}</a></h4>
                 </div>
             {% endfor %} 
-                  
          </div>
+         
          
          <br>
          <hr>
@@ -52,10 +80,20 @@
             <div>
                <h3>Trails</h2>
             </div>
+
+            
+               {% for utrail in usertrails_on_location %}
+                  <div>
+                     <h4><a href="{% url 'trail_detail' utrail.id %}">{{ utrail|linebreaksbr }}</a></h4>
+                  </div>
+               {% endfor %}
+
+           
+            <br>
                                                   
             {% for trail in trails_on_location %}
                <div>
-                   <h4><a href="/trails/{{trail.id}}/">{{ trail|linebreaksbr }}</a></h4>
+                   <h4><a href="{% url 'trail_detail' trail.id %}">{{ trail|linebreaksbr }}</a></h4>
                </div>
             {% endfor %}
                                                                                                                               
