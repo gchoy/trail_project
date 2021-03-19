@@ -5,7 +5,7 @@ from django.contrib import messages
 
 from .forms import LocationForm, SpotForm, TrailForm 
 from .models import Location, Spot, Trail
-#from .decorators import user_is_entry_author
+from .decorators import user_is_location_author, user_is_spot_author, user_is_trail_author
 
 import datetime
 
@@ -86,6 +86,7 @@ def location_new(request):
 
 
 @login_required
+@user_is_location_author
 def location_edit(request, id):
     location = get_object_or_404(Location, id=id)
     if request.method == "POST":
@@ -107,6 +108,7 @@ def location_edit(request, id):
     return render(request, 'trail_app/location_edit.html', {'location': location, 'form': form})
 
 @login_required
+@user_is_location_author
 def location_delete(request, id):
     location = get_object_or_404(Location, id=id)
     location.delete()
@@ -181,6 +183,7 @@ def spot_new(request):
                       {'form': form})
 
 @login_required
+@user_is_spot_author
 def spot_edit(request, id):
     spot = get_object_or_404(Spot, id=id)
     if request.method == "POST":
@@ -203,6 +206,7 @@ def spot_edit(request, id):
     return render(request, 'trail_app/spot_edit.html', {'spot': spot, 'form': form})
 
 @login_required
+@user_is_spot_author
 def spot_delete(request, id):
     spot = get_object_or_404(Spot, id=id)
     spot.delete()
@@ -275,6 +279,7 @@ def trail_new(request):
 
 
 @login_required
+@user_is_trail_author
 def trail_edit(request, id):
     trail = get_object_or_404(Trail, id=id)
     if request.method == "POST":
@@ -300,6 +305,7 @@ def trail_edit(request, id):
     return render(request, 'trail_app/trail_edit.html', {'trail': trail, 'form': form})
 
 @login_required
+@user_is_trail_author
 def trail_delete(request, id):
     trail = get_object_or_404(Trail, id=id)
     trail.delete()
